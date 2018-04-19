@@ -23,7 +23,7 @@ export default new Router({
 
         {
             path: '/Mynews', // 注册的路径，当路由匹配上/foo，会渲染component中的组件
-            redirect: 'comment'
+            redirect: 'news'
         },
         {
             path: '/', // 注册的路径，当路由匹配上/foo，会渲染component中的组件

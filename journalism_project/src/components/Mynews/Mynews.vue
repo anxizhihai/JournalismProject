@@ -1,7 +1,7 @@
 <template>
 <div class="mynewsbox">
 
-<div class="insidebox">
+<div class="insideboxs">
 <div class="leftbox">
 <router-link to="/comment"><div class="comments"><span>我的评论</span><span>(</span><span>{{msg}}</span><span>)</span></div></router-link>
 <router-link to="/news"><div class="news"><span>我的消息</span></div></router-link>
@@ -26,7 +26,7 @@ return{
 }
 </script>
 <style>
-.insidebox{
+.insideboxs{
   width: 896px;
   min-height: 862px;
   background: #FFFFFF;
@@ -54,9 +54,9 @@ return{
   width: 100px;
   height: 19px;
   font-family: MicrosoftYaHei;
-font-size: 14px;
-color: #333333;
-letter-spacing: 0;
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: 0;
 
 }
 

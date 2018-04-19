@@ -1,55 +1,20 @@
 <template>
   <div class="commentoutsidebox">
     <div v-for="userc in usercomments" class="commentinsidebox">
-      <div class="commenttime">{{userc.create_time}}</div>
-      <div class="commentcontent"><span class="commentcontentuserc">{{userc.content}}</span>
-      <span class="rightfloat">
-        <span class="commentagainst">
-          <span class="commentagainsti"><img src="../../assets/icon_thumb_down.png" alt=""></span>
-          <span class="commentagainsts">{{userc.against}}</span>
-        </span>
-        <span class="commentvote">
-          <span class="commentvotei"><img src="../../assets/icon_thumb_up.png" alt=""></span>
-          <span class="commentvotes">{{userc.vote}}</span>
-        </span>
-        <span class="commentpn">
-          <span class="commentpns"><img src="../../assets/icon_comment.png" alt=""></span>
-        </span>
-      </span>
-      </div>
-      <div class="commentgetcomm">
-        <button class="commentgetcommclick" type="button" @click="getcommentsl(userc.commentId)">展开</button>
-        <div v-show="ishow">
-            <div id="commentList">
-            <!-- 循环commentIdsList来显示每条评论具体的盖楼评论id -->
-            <div v-for="commentIds in commentIdsList" class="body">
-            <!-- 使用组件，并传递参数 -->
-            <!-- commentItem每个楼层具体的评论内容 -->
-            <!-- 嵌套的评论id关系 -->
-            <!-- 通过level来控制递归的次数 -->
-            <comment1Box v-bind:commentItem="commentItem" v-bind:commentIds="commentIds" v-bind:level="commentIds.split(',').length"/>
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="commentart"><span>来自:</span><span>{{userc.articleId.title}}</span></div>
-
-
-    </div>
-
+    <comment1 v-bind:userc="userc"></comment1>
   </div>
-
+  </div>
 </template>
 <script>
 import {getusercomments,getcommentslevel,getmessagecount} from '../../api/example.js'
 // 引入组件
 import comment1Box from '../../components/comment1Box/comment1Box.vue'
-import commentBox456 from '../../components/commentBox456/commentBox456.vue'
+import comment1 from '../../components/comment1/comment1.vue'
 export default {
 // 注册组件
     components: {
       comment1Box: comment1Box,
-      commentBox456:commentBox456
+      comment1:comment1
     },
 data(){
   return{
@@ -78,12 +43,7 @@ methods:{
     },
     //用户评论列表折叠
     getcommentsl:function(ab){
-       this.counts++
-           if(this.counts % 2===0){
-             this.ishow=false
-           }else{
-           this.ishow = true
-         }
+
       var vm = this
       getcommentslevel(ab).then(res=>{
             // 将接口返回的评论id列表和评论内容赋给相应变量
@@ -137,18 +97,18 @@ methods:{
    color: #6F6F6F;
 }
 .commentagainsti img{
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
   vertical-align: top;
 }
 .commentvotei img{
-   width: 24px;
-  height: 24px;
+   width: 15px;
+  height: 15px;
   vertical-align: top;
 }
 .commentpns img{
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
     vertical-align: top;
 }
 .commentart{
