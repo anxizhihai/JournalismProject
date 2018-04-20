@@ -102,7 +102,12 @@ methods:{
     },
 postadd:function(){
      postaddcomments(this.$route.query.id,this.cont).then(res=>{
+       if(res.data.code ==='success'){
+         alert('success');
+         this.getReview()
+       }
     })
+
 },
 getReview:function(){
       var vm = this
@@ -188,7 +193,7 @@ getReview:function(){
     } else if (minC >= 1) {
         return parseInt(minC) + "分钟前";
     }
-    return '刚刚';
+    return '';
 }
 }
 }

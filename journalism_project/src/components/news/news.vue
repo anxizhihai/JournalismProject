@@ -1,14 +1,15 @@
 <template>
   <!-- <div class="allreday" @click="postmessage('')">全部标记为已读</div> -->
 <div class="outsidebox">
-
-   <div class="ins"  v-for="news in mynew">
+  <div class="outsideboxsa" @click="postmessage()">全部标记为已读</div>
+   <div class="ins"  v-for="(news,index) in mynew">
     <div class="times"><span class="namess">{{news.user.nickname}}</span><span>回复了你</span><span class="timess">{{formattime(news.create_time)}}</span></div>
     <div class="conten">
-      <span class="reddot" v-show="!news.isRead"></span><span class="redcommentId" @click="postmessage(news.commentId)">{{news.content}}</span>
+      <span class="reddot" v-show="!news.isRead"></span><span class="redcommentId" @click="postmessage(news.commentId)">
+      <span @click="ready=index"><span>{{news.content}}</span></span>  </span>
     </div>
     <div class="articleid">
-      <span>来自:</span><span>{{news.articleId.title}}</span>
+      <span>来自:</span><span><router-link to="/Newslist">{{news.articleId.title}}</router-link></span>
     </div>
   </div>
    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
@@ -32,7 +33,8 @@ return{
   mynew:[],
   check:[],
   ac:0,
-  page:2
+  page:2,
+  reday:''
 }
   },
   created:function(){
@@ -45,7 +47,6 @@ methods:{
        getMynews(a).then(res=>{
          if(res.data.code==='success')
              vm.mynew=res.data.data.commnets
-
        })
 },
 formattime(time) {
@@ -53,10 +54,18 @@ return moment(time).format("YYYY-MM-DD HH:mm:ss");
 },
 postmessage:function(ab){
   var vm = this
+  console.log(this.ready)
+
   postmessagecheck(ab).then(res=>{
+     if(res.data.code ==='success'){
+       alert('success')
+      //  this.onInfinite()
+       $('.reddot').eq(this.ready).css('display','none')
+     }
 
   })
 },
+
  //我的消息提示
     getmessage:function(){
       var vm = this
@@ -90,6 +99,15 @@ postmessage:function(ab){
  <style>
  .outsidebox{
    padding: 0px 10px 0px 20px;
+   position: relative;
+ }
+ .outsideboxsa{
+   position: absolute;
+   top: -30px;
+   left: 600px;
+   font-family: MicrosoftYaHei;
+font-size: 16px;
+color: #333333;
  }
  .ins{
    padding: 37.5px 0px 30px 0px;

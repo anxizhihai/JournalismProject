@@ -33,11 +33,13 @@
   </div>
   <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
     <span slot="no-more">
-    There is no more Hacker News
+    There is no more  News
   </span>
   </infinite-loading>
   <div class="left">
-   <div class="lefto"v-for="(le,index) in leftv" @click="getlist(le)">{{navigations[index]}}</div>
+   <div class="lefto"v-for="(le,index) in leftv" @click="getlist(le)" :class="{'curs':curId===index}">
+     <div @click="curId=index">{{navigations[index]}}</div>
+     </div>
   </div>
   </div>
   </div>
@@ -49,9 +51,11 @@ import {getnewlist,gethotlist} from '../../api/example.js'
 import InfiniteLoading from 'vue-infinite-loading'
 
 
+
 export default {
   components: {
     InfiniteLoading,
+
 
   },
   data () {
@@ -65,6 +69,7 @@ export default {
         key:'',
         intsh: false,
         hots:[],
+        curId:0
       }
     },
     created: function () {
@@ -184,7 +189,7 @@ export default {
     } else if (minC >= 1) {
         return parseInt(minC) + "分钟前";
     }
-    return '刚刚';
+    return '';
 }
   }
 }
@@ -193,6 +198,11 @@ export default {
 .mainbox{
 background: #F9F9F9;
 margin-top: 60.9px;
+}
+
+.curs{
+  color: red;
+  border-left: 3px solid red;
 }
 
 .outsidebox{

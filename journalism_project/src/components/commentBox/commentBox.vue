@@ -95,17 +95,27 @@
         },
         postaddcommen:function(){
              postaddcommentsid(this.commentId,this.contens).then(res=>{
-
+                if(res.data.code ==='success'){
+                   alert('success')
+                }
         })
       },
       //点赞
     postrate:function(){
     postaddrate(this.commentId,'vote').then(res=>{
+     if(res.data.code ==='success'){
+         alert('success');
+
+       }
 
     })
 },
     postrates:function(){
     postaddrate(this.commentId,'against').then(res=>{
+     if(res.data.code ==='success'){
+         alert('success');
+
+       }
 
     })
 },

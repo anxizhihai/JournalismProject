@@ -13,7 +13,7 @@
            <div class="myaccount"><img src="../../assets/icon_my.png" alt=""><span>我的账户</span></div>
            </router-link>
            <router-link to="/Personalsettings"><div class="settingper">个人设置</div></router-link>
-           <div class="exitlogon"><img src="../../assets/icon_out.png" alt=""><span v-on:click="outside">退出登录</span></div>
+           <div class="exitlogon"><img src="../../assets/icon_out.png" alt=""><span v-on:click="outside"><router-link to="/login">退出登录</router-link></span></div>
       </div>
       </div>
 

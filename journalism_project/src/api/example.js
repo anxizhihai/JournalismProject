@@ -153,7 +153,7 @@ function getMynews(page) {
         params: {
             token: localStorage.token,
             page: page,
-            limit: '3'
+            limit: '4'
         }
     })
 }

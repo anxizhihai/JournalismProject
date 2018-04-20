@@ -25,7 +25,7 @@ export default {
   data(){
 return{
   msg:0,
-  curId:0
+  curId:1
 }
   },
   created:function(){
