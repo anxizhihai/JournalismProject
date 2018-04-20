@@ -224,6 +224,7 @@ export default {
 }
 .userAvatar{
   text-align: center;
+  padding-top: 10px;
 }
 .usernmaes{
   text-align: center;

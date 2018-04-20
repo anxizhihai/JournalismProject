@@ -1,19 +1,18 @@
 <template>
   <div class="headerlogin">
       <div class="journalism">
-        <img src="../../assets/logo_white.png" alt="">
+     <router-link to="/Newslist"><img src="../../assets/logo_white.png" alt=""></router-link>
         <span>新闻项目</span>
       </div>
       <div class="personalinformation">
-        <img class="avater" src="../../assets/logo.png" alt="">
-        <span class="apis">APIS</span>
+        <img class="avater" :src="avatr" alt="">
+        <span class="apis">{{name}}</span>
         <img class="arrow" src="../../assets/icon_arrow_up.png" alt="">
          <div class="Accountmessage">
            <router-link  to="/Mynews">
            <div class="myaccount"><img src="../../assets/icon_my.png" alt=""><span>我的账户</span></div>
            </router-link>
            <router-link to="/Personalsettings"><div class="settingper">个人设置</div></router-link>
-
            <div class="exitlogon"><img src="../../assets/icon_out.png" alt=""><span v-on:click="outside">退出登录</span></div>
       </div>
       </div>
@@ -22,6 +21,13 @@
 </template>
 <script>
 export default {
+  data(){
+    return{
+    name:localStorage.name,
+    avatr:localStorage.avatar
+    }
+
+  },
   methods:{
     outside:function(){
     localStorage.token=''
@@ -51,6 +57,7 @@ a{
   margin-top: 35px;
   padding: 0px;
   margin-left: 8.2px;
+  transition: all .3s;
 }
 .apis{
   display: inline-block;
@@ -89,6 +96,17 @@ a{
   left: 10px;
   top: 80px;
   padding-top: 18px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.personalinformation:hover .Accountmessage{
+     visibility:visible;
+     opacity: 1;
+}
+.personalinformation:hover .arrow{
+  transform: rotateZ(180deg)
 }
 .journalism img{
   width: 120px;
@@ -104,9 +122,6 @@ a{
   vertical-align:top;
   margin-left: 32.7px;
   line-height: 80px;
-}
-.myaccount{
-
 }
 .myaccount img{
   width: 22px;

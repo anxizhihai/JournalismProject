@@ -152,8 +152,8 @@
   vertical-align:top;
 }
 svg{
-  width: 139px;
-  height: 54.7px;
+  width: 100%;
+  height: 100%;
   }
 .aggregate2,.aggregate3,.aggregate4,.aggregate5{
   margin-top: 18px;

@@ -53,7 +53,7 @@ export default {
                localStorage.token=res.data.data.account.token;
                localStorage.id=res.data.data.account._id;
                localStorage.phone = this.phone;
-               localStorage.avatar = res.data.data.account.avatar
+              //  localStorage.avatar = res.data.data.account.avatar
                this.$router.push({path: '/Newslist'})
             }
         })
