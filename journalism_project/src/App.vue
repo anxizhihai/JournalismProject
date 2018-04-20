@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <v-headerlogin v-if="isShow"></v-headerlogin>
-    <v-header v-else></v-header>
+    <!-- <v-headerlogin v-if="isShow"></v-headerlogin>
+    <v-header v-else></v-header> -->
       <router-view></router-view>
     <v-footer></v-footer>
   </div>
@@ -35,6 +35,9 @@ export default {
       this.isShow=true
      }
     }
+  },
+  watch:{
+
   }
 }
 </script>

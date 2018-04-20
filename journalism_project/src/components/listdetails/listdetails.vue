@@ -1,4 +1,7 @@
 <template>
+<div>
+    <v-headerlogin v-if="isShow"></v-headerlogin>
+    <v-header v-else></v-header>
 <div class="articlebox">
 <div class="article">
   <!--标题-->
@@ -42,17 +45,22 @@
   <div class="leftbo4"><img src="../../assets/icon_share.png" alt=""></div>
 </div>
 </div>
+</div>
 </template>
 <script>
 import {getdetails,getKeyword,postaddcomments,getReviewlist} from '../../api/example.js'
 import commentBox from '../../components/commentBox/commentBox.vue'
 import InfiniteLoading from 'vue-infinite-loading'
+  import header from '../../components/header/header'
+import headerlogin from '../../components/headerlogin/headerlogin'
 // 引入组件
 export default {
   // 注册组件
     components: {
       commentBox: commentBox,
        InfiniteLoading,
+          'v-header':header,
+    'v-headerlogin':headerlogin
     },
 // 此时可以看到url中带有转义后的查询字符串——?msg=welcome%20to%20apis，
 //我们通过$route.query.msg取到msg，然后在页面中显示出来。
@@ -69,7 +77,8 @@ export default {
              }
         },
 created:function(){
-   this.getdetail(this.$route.query.id)
+   this.getdetail(this.$route.query.id),
+   this.judge()
   //  this.getReview()
 },
 methods:{
@@ -84,6 +93,13 @@ methods:{
       }
     })
 },
+        judge:function(){
+      if(localStorage.token==''){
+          this.isShow=false
+    }else{
+      this.isShow=true
+     }
+    },
 postadd:function(){
      postaddcomments(this.$route.query.id,this.cont).then(res=>{
     })

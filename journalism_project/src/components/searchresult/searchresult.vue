@@ -41,13 +41,13 @@ export default {
       return {
         newsList: [],
         img_url:'https://dev.apis.sh/PBXZ$DK1c/static/',
-        page:2,
+        page:1,
         key: ''
       }
     },
   created: function () {
       // 在created钩子中调用getNews方法
-     this.getKey(this.$route.query.keys,1)
+    //  this.getKey(this.$route.query.keys,1)
      console.log(this.$route.query.keys)
     },
   methods:{
@@ -70,7 +70,7 @@ export default {
            }else{
              console.log(res.data.message)
            }
-           if (Math.ceil(res.data.data.count/4)===this.page) {
+           if (Math.ceil(res.data.data.counts/2)===this.page) {
               this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
               }
            else {

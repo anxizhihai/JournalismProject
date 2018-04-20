@@ -3,6 +3,11 @@
     <div v-for="userc in usercomments" class="commentinsidebox">
     <comment1 v-bind:userc="userc"></comment1>
   </div>
+   <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
+    <span slot="no-more">
+    There is no more Hacker News
+  </span>
+  </infinite-loading>
   </div>
 </template>
 <script>
@@ -10,11 +15,13 @@ import {getusercomments,getcommentslevel,getmessagecount} from '../../api/exampl
 // 引入组件
 import comment1Box from '../../components/comment1Box/comment1Box.vue'
 import comment1 from '../../components/comment1/comment1.vue'
+import InfiniteLoading from 'vue-infinite-loading'
 export default {
 // 注册组件
     components: {
       comment1Box: comment1Box,
-      comment1:comment1
+      comment1:comment1,
+      InfiniteLoading,
     },
 data(){
   return{
@@ -24,18 +31,19 @@ data(){
   commentIdsList: [],
   commentIdsLists:[],
    counts:0,
+   page:2
   }
 
 },
  created:function(){
-       this.getuser()
+       this.getuser(1)
       //  this.getmessage()
   },
 methods:{
   //用户评论列表
-    getuser:function(){
+    getuser:function(a){
       var vm = this
-      getusercomments(1).then(res=>{
+      getusercomments(a).then(res=>{
         vm.usercomments = res.data.data.comments
         vm.commentId = res.data.data.comments.commentId
 
@@ -56,6 +64,25 @@ methods:{
 
       })
     },
+          onInfinite() {
+       setTimeout(() => {
+        getusercomments(this.page).then((res) => {
+           if (res.data.code ==='success'){
+               this.usercomments =  this.usercomments.concat(res.data.data.comments);
+                // this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+           }else{
+             console.log(res.data.message)
+           }
+           if (Math.ceil(res.data.data.counts/4)===this.page) {
+              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+              }
+           else {
+                  this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                  this.page++
+              }
+           });
+          },1000)
+        },
     //我的消息提示
     // getmessage:function(){
     //   var vm = this

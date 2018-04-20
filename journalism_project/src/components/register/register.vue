@@ -1,7 +1,10 @@
 <template>
+<div>
+
+<v-header></v-header>
 <div class="routersv">
 <div class="routersvs">
-<div class="registerz">
+<div class="registerzz">
   <div class="register">注册</div>
   <div class="aggregate">
     <div class="aggregate1"><input type="text" class="registerint1" placeholder="账号（请输入手机号码)" v-model="phone"></div>
@@ -19,12 +22,18 @@
 </div>
 </div>
 </div>
-
+</div>
 </template>
 <script>
  //引入获取图文验证码和短信验证码接口
   import {getImgCaptcha, getSmsCaptcha,getShortmessage,postregister} from '../../api/example.js'
+   import header from '../../components/header/header'
+
   export default {
+    components:{
+      'v-header':header,
+
+  },
     name: 'bar',
     data () {
       return {
@@ -35,8 +44,9 @@
         smsCaptcha:''
       }
     },
-    mounted() {
+    created() {
         this.getImg()
+
     },
     methods: {
       getImg: function () {
@@ -51,6 +61,7 @@
           console.log(err)
         })
       },
+
       //发送验证码
       getSms: function () {
         // 获取vue实例
@@ -95,7 +106,7 @@
   }
 </script>
 <style scoped>
-.registerz{
+.registerzz{
   width: 568px;
   background: rgba(255,255,255,0.24);
   box-shadow: 6px 6px 14px 5px rgba(39,52,101,0.08);

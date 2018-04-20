@@ -1,5 +1,9 @@
 <template>
+<div>
+
+    <v-header></v-header>
 <div class="routersv">
+
 <div class="routersvs">
   <div class="loginz">
       <div class="loginsz">登录</div>
@@ -17,17 +21,26 @@
   </div>
 </div>
 </div>
+</div>
 </template>
 <script>
 //引入获取图文验证码和短信验证码接口
   import {postlogin} from '../../api/example.js'
+  import header from '../../components/header/header'
+
+
 export default {
+    components: {
+      'v-header':header,
+
+  },
  data () {
       return {
         phone: '',
         password: ''
       }
     },
+
      methods:{
      postlog: function () {
         // 获取vue实例
@@ -35,12 +48,12 @@ export default {
         // 将用户输入的密码用户名作为参数传递
         postlogin(vm.phone,vm.password).then(res => {
             if(res.data.code=="success"){
-
                alert("登陆成功")
                localStorage.name=res.data.data.account.nickname;
                localStorage.token=res.data.data.account.token;
                localStorage.id=res.data.data.account._id;
                localStorage.phone = this.phone;
+               localStorage.avatar = res.data.data.account.avatar
                this.$router.push({path: '/Newslist'})
             }
         })
@@ -49,6 +62,7 @@ export default {
           console.log(err)
         })
       },
+
      }
 }
 </script>

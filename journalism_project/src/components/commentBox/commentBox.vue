@@ -41,7 +41,7 @@
       <div class="pspan">
         <p class="content">{{commentItem[commentId].content}}</p>
         <span class="message">
-        <span class="message1"><img  @click="postrates()" src="../../assets/icon_thumb_down.png" alt=""><span>{{commentItem[commentId].against}}</span></span>
+        <span class="message1"><img  @click="postrates()" src="../../assets/icon_thumb_down.png" alt=""><span >{{commentItem[commentId].against}}</span></span>
         <span class="message2"><img @click="postrate()" src="../../assets/icon_thumb_up.png" alt=""><span>{{commentItem[commentId].vote}}</span></span>
         <span class="message3"><img  @click="isShow()" src="../../assets/icon_comment.png" alt=""><span></span></span>
            <div class="commhs" v-show="ishow">
@@ -109,6 +109,9 @@
 
     })
 },
+    },
+    watch:{
+
     },
   }
 </script>

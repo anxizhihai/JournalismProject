@@ -205,6 +205,18 @@ function postmessagecheck(commentId) {
     })
 }
 
+//修改头像
+function postaccountchange(avatar, nickname) {
+    // post请求参数写在第二个参数位置
+    return Axios.post('/account/detail/change', {
+
+        token: localStorage.token,
+        avatar: avatar,
+        nickname: nickname
+
+    })
+}
+
 // 导出接口方法
 export {
     getNewsList,
@@ -228,6 +240,7 @@ export {
     getusercomments,
     getcommentslevel,
     getmessagecount,
-    postmessagecheck
+    postmessagecheck,
+    postaccountchange
 
 }

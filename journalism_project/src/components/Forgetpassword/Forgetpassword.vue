@@ -1,4 +1,6 @@
 <template>
+<div>
+  <v-header></v-header>
 <div class="routersv">
 <div class="routersvs">
 <div class="registerz">
@@ -19,12 +21,17 @@
 </div>
 </div>
 </div>
-
+</div>
 </template>
 <script>
  //引入获取图文验证码和短信验证码接口
   import {getImgCaptcha, getSmsCaptchaf,getShortmessagef,postregisterf} from '../../api/example.js'
+   import header from '../../components/header/header'
   export default {
+     components:{
+      'v-header':header,
+
+  },
     name: 'bar',
     data () {
       return {

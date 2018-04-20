@@ -1,5 +1,8 @@
 <template>
 <div>
+
+<div>
+
   <div class="hot">
   <div class="searchs">
      <input type="text" class="search" v-model="key" @focus="modalshow()" @blur="modalhide()">
@@ -39,13 +42,17 @@
   </div>
   </div>
   </div>
+  </div>
 </template>
 <script>
 import {getnewlist,gethotlist} from '../../api/example.js'
 import InfiniteLoading from 'vue-infinite-loading'
+
+
 export default {
   components: {
     InfiniteLoading,
+
   },
   data () {
       return {
@@ -65,6 +72,7 @@ export default {
       // 在created钩子中调用getNews方法
        this.getlist(this.me,1)
        this.gethot()
+
     },
 
 
@@ -83,6 +91,7 @@ export default {
           console.log(err)
         })
       },
+
       modalshow:function(){
              this.intsh=true
       },
